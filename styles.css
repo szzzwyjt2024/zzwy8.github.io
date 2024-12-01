@@ -1,0 +1,1202 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+    background: #1a73e8;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.add-asset-form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    background: #1a73e8;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    top: 0;
+}
+
+button:hover {
+    background: #1557b0;
+    top: 2px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.asset-list {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f5f5f5;
+}
+
+.delete-btn {
+    background: #ff4444;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    top: 0;
+}
+
+.delete-btn:hover {
+    background: #cc0000;
+    top: 2px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.maintenance-warning {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.maintenance-btn {
+    background: #28a745;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-left: 5px;
+    display: none;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.maintenance-btn:hover {
+    background: #218838;
+    transform: translateY(2px);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s;
+}
+
+/* 添加维保日期接近时的样式 */
+.maintenance-warning {
+    animation: warning-flash 2s infinite;
+}
+
+@keyframes warning-flash {
+    0% { background-color: #fff3cd; }
+    50% { background-color: #ffe8a1; }
+    100% { background-color: #fff3cd; }
+}
+
+tr:hover {
+    background-color: #f8f9fa;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+    
+    th, td {
+        min-width: 120px;
+    }
+} 
+
+/* 添加新的样式 */
+.login-form {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.user-info {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.logout-btn {
+    background: #dc3545;
+    margin-left: 10px;
+    transition: all 0.3s ease;
+    position: relative;
+    top: 0;
+}
+
+.logout-btn:hover {
+    background: #cc0000;
+    transform: translateY(2px);
+    box-shadow: 0 2px 8px rgba(220,53,69,0.3);
+}
+
+.function-buttons {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.function-buttons button {
+    padding: 10px 20px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.function-buttons button:hover {
+    transform: translateY(2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.import-btn, .export-btn {
+    background: #28a745;
+}
+
+.import-btn:hover, .export-btn:hover {
+    background: #218838;
+}
+
+.add-btn {
+    background: #17a2b8;
+}
+
+.add-btn:hover {
+    background: #138496;
+}
+
+.manage-users-btn {
+    background: #6610f2;
+}
+
+.manage-users-btn:hover {
+    background: #520dc2;
+}
+
+.search-area {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 15px;
+    background: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.search-group {
+    flex: 1;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.search-options {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.search-options label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.search-options input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+}
+
+#filterType {
+    width: 200px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    align-self: flex-start;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    overflow-y: auto;
+    padding: 20px 0;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 30px auto;
+    padding: 25px;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 1200px;
+    border-radius: 8px;
+    position: relative;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.modal-content:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.admin-only {
+    display: none;
+}
+
+/* 添加资产索引样式 */
+.asset-index {
+    font-weight: bold;
+    color: #1a73e8;
+}
+
+/* 日志相关样式 */
+.log-btn {
+    background: #6c757d;
+}
+
+.log-btn:hover {
+    background: #5a6268;
+}
+
+.log-filters {
+    margin: 20px 0;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.log-filters select,
+.log-filters input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.log-list {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.log-list table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.log-list th,
+.log-list td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.log-type-login { color: #17a2b8; }
+.log-type-asset { color: #28a745; }
+.log-type-maintenance { color: #ffc107; }
+.log-type-user { color: #dc3545; }
+
+.log-export {
+    margin-top: 20px;
+    text-align: right;
+}
+
+#exportLogs {
+    background: #28a745;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    top: 0;
+}
+
+#exportLogs:hover {
+    background: #218838;
+    transform: translateY(2px);
+    box-shadow: 0 2px 8px rgba(40,167,69,0.3);
+}
+
+/* 搜索按钮相关样式 */
+.search-input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.search-input-group input {
+    flex: 1;
+}
+
+.search-btn {
+    background: #1a73e8;
+    color: white;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.3s ease;
+    position: relative;
+    top: 0;
+}
+
+.search-btn:hover {
+    background: #1557b0;
+    transform: translateY(2px);
+    background: #1557b0;
+    box-shadow: 0 2px 8px rgba(26,115,232,0.3);
+}
+
+.search-icon {
+    font-size: 16px;
+}
+
+/* 修改现有的搜索框样式 */
+#searchInput {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+#searchInput:focus {
+    outline: none;
+    border-color: #1a73e8;
+    box-shadow: 0 0 0 2px rgba(26,115,232,0.2);
+} 
+
+/* 模态框相关样式优化 */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.modal-header h2 {
+    margin: 0;
+    color: #1a73e8;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close:hover {
+    color: #333;
+}
+
+/* 用户管理界面样式优化 */
+.user-management {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+}
+
+.add-user-form {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.user-list {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.user-list table {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.user-list th {
+    background: #e9ecef;
+    padding: 12px;
+}
+
+/* 用户管理按钮样式优化 */
+.edit-user-btn, .delete-user-btn, .reset-pwd-btn {
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.edit-user-btn:hover {
+    background: #138496;
+}
+
+.delete-user-btn:hover {
+    background: #c82333;
+}
+
+.reset-pwd-btn:hover {
+    background: #e0a800;
+}
+
+/* 系统日志界面样式优化 */
+.log-filters {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.log-filters select,
+.log-filters input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    min-width: 150px;
+}
+
+#clearLogFilter {
+    background: #6c757d;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    top: 0;
+}
+
+#clearLogFilter:hover {
+    background: #5a6268;
+    transform: translateY(2px);
+    box-shadow: 0 2px 8px rgba(108,117,125,0.3);
+}
+
+.log-list {
+    max-height: 500px;
+    overflow-y: auto;
+    margin: 20px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.log-list table {
+    margin: 0;
+}
+
+.log-list th {
+    position: sticky;
+    top: 0;
+    background: #f8f9fa;
+    z-index: 1;
+}
+
+.log-export {
+    text-align: right;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
+
+/* 添加动画效果 */
+.modal-content {
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* 响应式布局优化 */
+@media (max-width: 768px) {
+    .user-management {
+        grid-template-columns: 1fr;
+    }
+    
+    .log-filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 5% auto;
+    }
+} 
+
+/* 添加新资产模态框样式 */
+#addAssetModal .modal-content {
+    max-width: 800px;
+    margin: 30px auto;
+}
+
+#addAssetModal .add-asset-form {
+    margin-bottom: 0;
+    box-shadow: none;
+    padding: 0;
+} 
+
+/* 记住密码复选框样式 */
+.remember-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+}
+
+/* 用户管理界面新增样式 */
+.user-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.batch-user-form {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.batch-actions {
+    margin-bottom: 15px;
+}
+
+#exportUsers {
+    background: #28a745;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    top: 0;
+}
+
+#exportUsers:hover {
+    background: #218838;
+    transform: translateY(2px);
+    box-shadow: 0 2px 8px rgba(40,167,69,0.3);
+}
+
+/* 修改密码模态框样式 */
+#changePasswordModal .modal-content {
+    max-width: 400px;
+} 
+
+/* 调整添加资产模态框的样式 */
+#addAssetModal .modal-content {
+    max-width: 800px;
+    margin: 30px auto;
+}
+
+/* 调整用户管理模态框的样式 */
+#userManageModal .modal-content {
+    max-width: 1000px;
+}
+
+/* 调整日志模态框的样式 */
+#logModal .modal-content {
+    max-width: 1200px;
+}
+
+/* 调整维保设备模态框的样式 */
+#maintenanceModal .modal-content {
+    max-width: 1000px;
+}
+
+/* 修改表格在模态框中的显示 */
+.modal-content table {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.modal-content .log-list {
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+/* 优化模态框中的表单布局 */
+.modal-content .form-group {
+    margin-bottom: 20px;
+}
+
+/* 调整模态框标题样式 */
+.modal-header {
+    margin: -25px -25px 20px -25px;
+    padding: 20px 25px;
+    background: #f8f9fa;
+    border-radius: 8px 8px 0 0;
+    border-bottom: 1px solid #dee2e6;
+}
+
+/* 调整关闭按钮位置 */
+.close, .close-users, .close-logs, .close-asset {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* 响应式布局优化 */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        margin: 20px auto;
+        padding: 15px;
+    }
+    
+    .modal {
+        padding: 10px;
+    }
+    
+    .modal-header {
+        margin: -15px -15px 15px -15px;
+        padding: 15px;
+    }
+    
+    .user-management {
+        grid-template-columns: 1fr;
+    }
+    
+    .log-filters {
+        flex-direction: column;
+    }
+}
+
+/* 添加滚动条样式 */
+.modal-content ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.modal-content ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.modal-content ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.modal-content ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* 优化Excel导出选项样式 */
+.export-modal {
+    max-width: 600px !important;
+}
+
+.export-options {
+    padding: 20px;
+}
+
+.export-desc {
+    color: #666;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.select-all-option {
+    background: #f8f9fa;
+    padding: 12px 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    border: 1px solid #e9ecef;
+}
+
+.select-all-option label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    cursor: pointer;
+    font-weight: 500;
+    color: #1a73e8;
+}
+
+.export-columns {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    margin-bottom: 25px;
+}
+
+.export-columns label {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.export-columns label:hover {
+    background: #e9ecef;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.export-columns input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.export-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.btn-primary {
+    background: #1a73e8;
+    color: white;
+    padding: 10px 24px;
+    border: none;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: #1557b0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(26,115,232,0.2);
+}
+
+.btn-secondary {
+    background: #f8f9fa;
+    color: #333;
+    padding: 10px 24px;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: #e9ecef;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* 响应式布局优化 */
+@media (max-width: 576px) {
+    .export-columns {
+        grid-template-columns: 1fr;
+    }
+    
+    .export-buttons {
+        flex-direction: column-reverse;
+    }
+    
+    .export-buttons button {
+        width: 100%;
+    }
+    
+    .export-modal {
+        margin: 10px;
+        width: calc(100% - 20px);
+    }
+} 
+
+/* 维保设备列表样式 */
+.maintenance-summary {
+    background: #f8f9fa;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.maintenance-summary span {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.maintenance-overdue {
+    background-color: #ffe3e3 !important;
+    color: #c92a2a;
+}
+
+.maintenance-today {
+    background-color: #fff3bf !important;
+    color: #994c00;
+}
+
+.maintenance-warning {
+    background-color: #fff9db !important;
+    color: #664d03;
+}
+
+.update-maintenance-btn {
+    background: #28a745;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.update-maintenance-btn:hover {
+    background: #218838;
+}
+
+#maintenanceTable td {
+    padding: 12px 8px;
+}
+
+.maintenance-list {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+/* 添加二维码按钮样式 */
+.qrcode-btn {
+    background: #6610f2;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-left: 5px;
+    transition: all 0.3s ease;
+}
+
+.qrcode-btn:hover {
+    background: #520dc2;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 6px rgba(102,16,242,0.3);
+}
+
+.qrcode-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+}
+
+.qrcode-container p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #333;
+}
+
+#qrcode {
+    padding: 10px;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+#qrcode img {
+    display: block;
+    margin: 0 auto;
+}
+
+/* 添加进度条样式 */
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 15px;
+}
+
+.progress {
+    height: 100%;
+    background-color: #1a73e8;
+    transition: width 0.3s ease;
+}
+
+/* 导出按钮样式 */
+#exportQRCodes {
+    background: #28a745;
+    margin-left: 10px;
+}
+
+#exportQRCodes:hover {
+    background: #218838;
+}
+
+/* 维保历史记录样式 */
+.maintenance-history {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #dee2e6;
+}
+
+.maintenance-history h3 {
+    margin-bottom: 15px;
+    color: #1a73e8;
+}
+
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.history-table th,
+.history-table td {
+    padding: 10px;
+    border: 1px solid #dee2e6;
+    text-align: left;
+}
+
+.history-table th {
+    background: #f8f9fa;
+    font-weight: 500;
+}
+
+.history-table tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* 维保状态颜色样式 */
+.maintenance-overdue {
+    background-color: #ffe3e3 !important;
+    color: #c92a2a;
+}
+
+.maintenance-today {
+    background-color: #fff3bf !important;
+    color: #994c00;
+}
+
+.maintenance-warning {
+    background-color: #fff9db !important;
+    color: #664d03;
+}
+
+/* 维保统计信息样式 */
+.maintenance-summary {
+    background: #f8f9fa;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.maintenance-summary span {
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 15px;
+    border-radius: 4px;
+}
+
+.maintenance-summary .maintenance-total {
+    background: #e7f5ff;
+    color: #1971c2;
+}
+
+.maintenance-summary .maintenance-overdue {
+    background: #ffe3e3;
+    color: #c92a2a;
+}
+
+.maintenance-summary .maintenance-today {
+    background: #fff3bf;
+    color: #994c00;
+}
+
+.maintenance-summary .maintenance-warning {
+    background: #fff9db;
+    color: #664d03;
+}
+
+/* 状态文本样式 */
+.status-text {
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+/* 更新维保按钮样式 */
+.update-maintenance-btn {
+    background: #28a745;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.update-maintenance-btn:hover {
+    background: #218838;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 6px rgba(40,167,69,0.3);
+}
+
+/* 编辑按钮样式 */
+.edit-btn {
+    background: #17a2b8;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-right: 5px;
+    transition: all 0.3s ease;
+}
+
+.edit-btn:hover {
+    background: #138496;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 6px rgba(23,162,184,0.3);
+}
+
+/* 添加30天内维保的样式 */
+.maintenance-normal {
+    background: #e7f5ff;
+    color: #1971c2;
+}

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>深圳住宅物业固定资产管理系统</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 添加登录界面 -->
+    <div id="loginForm" class="login-form">
+        <h2>系统登录</h2>
+        <form id="login">
+            <div class="form-group">
+                <label for="username">用户名：</label>
+                <input type="text" id="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">密码：</label>
+                <input type="password" id="password" required>
+            </div>
+            <div class="form-group remember-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="rememberPassword">
+                    记住密码
+                </label>
+            </div>
+            <button type="submit">登录</button>
+        </form>
+    </div>
+
+    <div id="mainContent" class="container" style="display: none;">
+        <div class="user-info">
+            <span id="currentUser"></span>
+            <button id="logoutBtn" class="logout-btn">退出登录</button>
+        </div>
+        <h1>深圳住宅物业固定资产管理系统</h1>
+        
+        <!-- 改功能按钮区，调整按钮顺序 -->
+        <div class="function-buttons">
+            <button id="exportExcel" class="export-btn">导出Excel</button>
+            <button id="exportQRCodes" class="export-btn">导出所有二维码</button>
+            <button id="addAssetBtn" class="add-btn admin-only">添加新资产</button>
+            <button id="manageUsers" class="admin-only manage-users-btn">用户管理</button>
+            <button id="checkMaintenance" class="check-btn">查看待维保设备</button>
+            <button id="viewLogs" class="log-btn">查看系统日志</button>
+            <button id="viewMaintenanceLogs" class="log-btn">查看维保日志</button>
+        </div>
+
+        <!-- 修改搜索区域，添加搜索按钮 -->
+        <div class="search-area">
+            <div class="search-group">
+                <div class="search-input-group">
+                    <input type="text" id="searchInput" placeholder="输入关键词搜索...">
+                    <button id="searchBtn" class="search-btn">
+                        <i class="search-icon">🔍</i>
+                        搜索
+                    </button>
+                </div>
+                <div class="search-options">
+                    <label>
+                        <input type="checkbox" id="searchName" checked>
+                        资产名称
+                    </label>
+                    <label>
+                        <input type="checkbox" id="searchCode" checked>
+                        资产编号
+                    </label>
+                    <label>
+                        <input type="checkbox" id="searchLocation" checked>
+                        存放地点
+                    </label>
+                    <label>
+                        <input type="checkbox" id="searchPerson" checked>
+                        维保负责人
+                    </label>
+                </div>
+            </div>
+            <select id="filterType">
+                <option value="all">所有类型</option>
+                <option value="安防设备">安防设备</option>
+                <option value="清洁设备">清洁设备</option>
+                <option value="园艺工具">园艺工具</option>
+                <option value="消防设备">消防设备</option>
+                <option value="健身器材">健身器材</option>
+                <option value="办公设备">办公设备</option>
+                <option value="维修工具">维修工具</option>
+                <option value="其他设备">其他设备</option>
+            </select>
+        </div>
+
+        <!-- 修改资产列表部分 -->
+        <div class="asset-list">
+            <h2>资产列表</h2>
+            <table id="assetTable">
+                <thead>
+                    <tr>
+                        <th>资产名称</th>
+                        <th>资产编号</th>
+                        <th>资产类型</th>
+                        <th>购买日期</th>
+                        <th>存放地点</th>
+                        <th>下次维保日期</th>
+                        <th>维保负责人</th>
+                        <th>上次维保日期</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="assetTableBody">
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 修改待维保设备弹窗 -->
+        <div id="maintenanceModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>待维保设备列表</h2>
+                    <span class="close">&times;</span>
+                </div>
+                <div id="maintenanceStats"></div>
+                <div class="maintenance-list">
+                    <table id="maintenanceTable">
+                        <thead>
+                            <tr>
+                                <th>资产名称</th>
+                                <th>资产编号</th>
+                                <th>存放地点</th>
+                                <th>维保负责人</th>
+                                <th>上次维保日期</th>
+                                <th>应维保日期</th>
+                                <th>剩余时间</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="maintenanceTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- 将添加新资产表单改为模态框 -->
+        <div id="addAssetModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>添加新资产</h2>
+                    <span class="close close-asset">&times;</span>
+                </div>
+                <div class="add-asset-form">
+                    <form id="assetForm">
+                        <div class="form-group">
+                            <label for="assetName">资产名称：</label>
+                            <input type="text" id="assetName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="assetCode">资产编号：</label>
+                            <input type="text" id="assetCode" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="assetType">资产类型：</label>
+                            <select id="assetType">
+                                <option value="安防设备">安防设备</option>
+                                <option value="清洁设备">清洁设备</option>
+                                <option value="园艺工具">园���工具</option>
+                                <option value="消防设备">消防设备</option>
+                                <option value="健身器材">健身器材</option>
+                                <option value="办公设备">办公设备</option>
+                                <option value="维修工具">维修工具</option>
+                                <option value="其他设备">其他设备</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="purchaseDate">购买日期：</label>
+                            <input type="date" id="purchaseDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="location">存放地点：</label>
+                            <input type="text" id="location" required placeholder="例如：1栋值班室、地下车库、物业办公室等">
+                        </div>
+                        <div class="form-group">
+                            <label for="maintenanceDate">下次维保日期：</label>
+                            <input type="date" id="maintenanceDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="maintenancePerson">维保负责人：</label>
+                            <input type="text" id="maintenancePerson" placeholder="请输入维保负责人姓名和联系方式">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastMaintenanceDate">上次维保日期：</label>
+                            <input type="date" id="lastMaintenanceDate">
+                        </div>
+                        <button type="submit">添加资产</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- 添加用户管理模态框 -->
+        <div id="userManageModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>用户管理</h2>
+                    <span class="close close-users">&times;</span>
+                </div>
+                <div class="user-management">
+                    <div class="user-actions">
+                        <div class="add-user-form">
+                            <h3>添加新用户</h3>
+                            <form id="addUserForm">
+                                <div class="form-group">
+                                    <label for="newUsername">用户名：</label>
+                                    <input type="text" id="newUsername" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="newPassword">密码：</label>
+                                    <input type="password" id="newPassword" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="userRole">用户角色：</label>
+                                    <select id="userRole">
+                                        <option value="user">普通用户</option>
+                                        <option value="admin">管理员</option>
+                                    </select>
+                                </div>
+                                <button type="submit">添加用户</button>
+                            </form>
+                        </div>
+                        
+                        <div class="batch-user-form">
+                            <h3>批量生成用户</h3>
+                            <form id="batchUserForm">
+                                <div class="form-group">
+                                    <label for="userPrefix">用户名前缀：</label>
+                                    <input type="text" id="userPrefix" required placeholder="例如：user">
+                                </div>
+                                <div class="form-group">
+                                    <label for="userCount">生成数量：</label>
+                                    <input type="number" id="userCount" required min="1" max="100">
+                                </div>
+                                <div class="form-group">
+                                    <label for="passwordLength">密码长度：</label>
+                                    <input type="number" id="passwordLength" required min="6" max="16" value="8">
+                                </div>
+                                <button type="submit">批量生成</button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <div class="user-list">
+                        <h3>用户列表</h3>
+                        <div class="user-list-header">
+                            <div class="user-search">
+                                <input type="text" id="userSearchInput" placeholder="搜索用户名...">
+                                <select id="userRoleFilter">
+                                    <option value="all">所有角色</option>
+                                    <option value="admin">管员</option>
+                                    <option value="user">普通用户</option>
+                                </select>
+                            </div>
+                            <div class="batch-actions">
+                                <button id="exportUsers">导出用户信息</button>
+                            </div>
+                        </div>
+                        <table id="userTable">
+                            <thead>
+                                <tr>
+                                    <th>用户名</th>
+                                    <th>角色</th>
+                                    <th>创建时间</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="userTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 添加系统日志模态框 -->
+        <div id="logModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>系统操作日志</h2>
+                    <span class="close close-logs">&times;</span>
+                </div>
+                <div class="log-filters">
+                    <select id="logTypeFilter">
+                        <option value="all">所有操作</option>
+                        <option value="login">登录操作</option>
+                        <option value="asset">资产操作</option>
+                        <option value="maintenance">维保操作</option>
+                        <option value="user">用户管理</option>
+                    </select>
+                    <input type="date" id="logDateFilter">
+                    <button id="clearLogFilter">清除筛选</button>
+                </div>
+                <div class="log-list">
+                    <table id="logTable">
+                        <thead>
+                            <tr>
+                                <th>时间</th>
+                                <th>操作人</th>
+                                <th>操作类型</th>
+                                <th>操作详情</th>
+                                <th>操作结果</th>
+                            </tr>
+                        </thead>
+                        <tbody id="logTableBody">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="log-export">
+                    <button id="exportLogs">导出日志</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 添加维保日志模态框 -->
+        <div id="maintenanceLogModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>维保操作日志</h2>
+                    <span class="close close-maintenance-logs">&times;</span>
+                </div>
+                <div class="log-filters">
+                    <input type="text" id="maintenanceSearchInput" placeholder="搜索资产名称或编号...">
+                    <input type="date" id="maintenanceLogDateFilter">
+                    <button id="clearMaintenanceLogFilter">清除筛选</button>
+                </div>
+                <div class="log-list">
+                    <table id="maintenanceLogTable">
+                        <thead>
+                            <tr>
+                                <th>时间</th>
+                                <th>资产名称</th>
+                                <th>资产编号</th>
+                                <th>维保日期</th>
+                                <th>下次维保日期</th>
+                                <th>维保人员</th>
+                                <th>操作人</th>
+                            </tr>
+                        </thead>
+                        <tbody id="maintenanceLogTableBody">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="log-export">
+                    <button id="exportMaintenanceLogs">导出维保日志</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+    <script src="script.js"></script>
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+    <script src="https://unpkg.com/file-saver/dist/FileSaver.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+</body>
+</html> 
